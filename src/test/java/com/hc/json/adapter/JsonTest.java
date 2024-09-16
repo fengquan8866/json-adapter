@@ -13,4 +13,11 @@ public class JsonTest {
         String json = Json.toJson(new User("zsf", 18));
         System.out.println(json);
     }
+
+    @Test
+    public void fromJson() {
+        String json = "{\"name\":\"zsf\",\"age\":18}";
+        User user = Json.fromJson(json, User.class);
+        System.out.println(user);
+    }
 }

@@ -1,6 +1,9 @@
 package com.hc.json.adapter;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import java.io.IOException;
@@ -16,6 +19,15 @@ public class JacksonAdapter implements JsonAdapter {
     private final TypeFactory typeFactory = TypeFactory.defaultInstance();
 
     public JacksonAdapter() {
+        // 空对象
+        this.objMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+        // 空属性
+        this.objMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        // 忽略null
+        this.objMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        // LocalDateTime
+        this.objMapper.findAndRegisterModules();
+
         JsonAdapterConfigManager.config(this.objMapper);
     }
 

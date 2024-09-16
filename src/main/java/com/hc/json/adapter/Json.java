@@ -22,6 +22,10 @@ public class Json {
         return ADAPTER.fromJson(jsonStr, clazz);
     }
 
+    public static <T> T fromJson(String json, TypeToken<T> typeOfT) throws JsonException {
+        return ADAPTER.fromJson(json, typeOfT.getType());
+    }
+
     public static <T> List<T> fromJsonToList(String jsonStr, Class<T> clazz) throws JsonException {
         return ADAPTER.fromJsonToList(jsonStr, clazz);
     }
